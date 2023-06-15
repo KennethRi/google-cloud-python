@@ -36,11 +36,17 @@ from google.maps import addressvalidation_v1
 
 async def sample_validate_address():
     # Create a client
-    client = addressvalidation_v1.AddressValidationAsyncClient()
+    client = addressvalidation_v1.AddressValidationAsyncClient(client_options = {
+        'api_key': api_key
+    })
 
     # Initialize request argument(s)
-    request = addressvalidation_v1.ValidateAddressRequest(
-    )
+    request = addressvalidation_v1.ValidateAddressRequest({
+        'address':
+            {'address_lines': ["Theresienstraße 41 Besuchereingang: Marianne-von-Werefkin-Weg",
+                                "Theresienstraße 39", 
+                                "80333 München, Germany"]}
+    })
 
     # Make the request
     response = await client.validate_address(request=request)
